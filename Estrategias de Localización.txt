@@ -1,0 +1,76 @@
+Estrategias de Localización:
+
+	1. By.id("string")
+	2. By.name("string")
+	3. By.className("class")
+	4. By.tagName("tag")
+	5. By.linkText("string")
+	6. By.partialLinkText("string")
+	7. By.cssSelector("string")
+	8. By.xpath("string")	
+	9. JavaScript
+
+	1- By.id(“id”)
+	2- By.name("name")
+	3- By.className(“class”)
+	4- By.tagName("tag")
+	5- By.linkText("string")
+	6- By.partialLinkText("string")
+	7- By.cssSelector("input[name='q']")
+	8- By.xpath("//input[@name='q']")
+	9- JavaScript
+
+XPATH Formula:   //TAG[@ATRIBUTE="VALUE"]
+
+
+Ejemplos:
+
+		/*@Test void localizadores() {
+		 
+		By locator = By.id("id_del_elemento");
+		
+		By locator_name = By.name("name_elemnt");
+		
+		By locator_className = By.className("clase_elemento");
+		
+		By locator_tagName = By.tagName("tag");
+		
+		By locator_linktext = By.linkText("texto_link");
+		
+		By locator_partialLinkText = By.partialLinkText("parte_texto");
+		
+		By locator_cssSelector = By.cssSelector("input[name='q']");
+		
+		By locator_Xpath = By.xpath("//input[@name='q']");
+		
+		// JavaScript
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		 WebElement searchBox = (WebElement)js.executeScript("return document.getElementsByName('q')[0]");
+		
+		}*/
+
+
+Escenario 1. Registrar usuario.
+
+	// PASO 0: Ir a la url: https://demo.guru99.com/test/newtours/index.php
+	// PASO 1: Clic en el botón 'REGISTER'.
+	// PASO 2: Completar campos para registrar usuario.
+	// PASO 3: Confimar mensaje de usuario registrado.
+
+
+	Keyboard Shotcuts in Eclipse:
+
+		Ctrl+Alt+Down	Copy line(s)
+		Alt+Down	Move line(s) down
+		Alt+Up	Move line(s) up
+		Ctrl+D	Delete a line
+
+Páginas de prueba
+
+	https://buggy.justtestit.org/
+	https://testingqarvn.com.es/practicas-qa/
+	https://www.federico-toledo.com/sitios-de-prueba-para-practicar/
+
+	demoqa.com
+
