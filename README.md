@@ -127,10 +127,15 @@ WebElement searchBox = (WebElement)js.executeScript("return document.getElements
 
 <summary>Todo es relativo</summary>
 
-- Usando el 'Submit', hacia arriba, tiene 2 'hermanos' y 1 'padre.
+- Usando el elemento 'Submit', hacia arriba, tiene 2 'hermanos' y 1 'padre.
+
+![alt text](image-13.png)
+
 - Usando el 'Form', hacia abajo, tiene 3 hijos.
 
-![alt text](/images/image0.png)
+
+![alt text](image-15.png)
+
 
 </details>
 
@@ -320,9 +325,15 @@ public class RelativeXpathTests extends BaseTest {
 
 ### Diferencia entre 'Position' e 'Index'
 
+<details>
+
+<summary>XPath con múltiples resultados, y los métodos para definir elementos.</summary>
+
 - Cuando encontramos una página que nos arroja varios resultados para un XPath, requerimos definir cuál es el elemento que queremos.
 
 - Por ejemplo, en la página bajo prueba, si elegimos un elemento `H5` nos encuentra 6 resultados.
+
+- `NOTA`: En los XPaths, los índices comienzan en '1', no en 'CERO' como los lenguajes de programación.
 
 ```
 //H5
@@ -330,25 +341,12 @@ public class RelativeXpathTests extends BaseTest {
 
 ![alt text](image-7.png)
 
-- Imaginemos que por alguna razón NO necesitamos el primer resultado, sólo los que dicen 'Test Case X: ...'
-
-- NOTA: En los XPaths, los índices comienzan en '1', no en 'CERO' como los lenguajes de programación.
-
-<details>
-
-<summary>Position</summary>
-
-- Así como el Index, el comando 'position()=X' también arroja un elemento XPath por marcador.
-
-```
-//H5[position()=3]
-```
-
-- Si hacen lo mismo, ¿para qué sirve?
-
-![alt text](image-9.png)
 
 </details>
+
+
+---
+
 
 <details>
 
@@ -360,7 +358,146 @@ public class RelativeXpathTests extends BaseTest {
 //H5[2]
 ```
 
+- Para elegir un único elemento XPath, debemos encerrar entre `paréntesis cuadrados` la dirección del elemento.
+
 ![alt text](image-8.png)
+
+
+- Para XPaths con `atributos`, se debe encerrar entre `paréntesis` el XPath completo y al final entre `corchetes` se coloca el índice.
+
+```
+(//div[@class='row'])[2]
+```
+
+![alt text](image-20.png)
+
+---
+
+- Ahora, digamos que dentro de este elemento, queremos el botón `REMOVE`. 
+- Podemos usar la búsqueda de elementos hijos de este elemento.
+
+```
+(//div[@class='row'])[2]/button[3]
+```
+
+![alt text](image-21.png)
+
+- Pero, podemos mejorar el XPath, teniendo en cuenta una consideración del método `INDEX`.
+
+- `OJO` : si escribimos este comando, nos dará como resultado que efectivamente encontró los 6 botones, que coinciden con el criterio de búsqueda:
+
+![alt text](image-23.png)
+
+```
+//div[@class='row']/button
+```
+
+![alt text](image-22.png)
+
+
+- `PERO` si ponemos los corchetes, NO va encontrar nuestro elemento.
+
+```
+//div[@class='row']/button[6]
+```
+
+- Por que, XPath va a buscar dentro del `PRIMER` elemento que cumpla la condición de ser DIV y tener clase ROW, el sexto elemento tipo BUTTON.
+
+- Y sabemos por el DOM que sólo contiene 3 elementos.
+
+- La sintaxis correcta, es nuevamente, envolver TODO el XPath entre `paréntesis` para que PRIMERO busque TODOS los elementos tipo BUTTON dentro de TODOS los DIV con clase ROW.
+
+
+
+```
+(//div[@class='row']/button)[6]
+```
+
+- Y ahora sí, encontrados TODOS, elegir ya sea el último, o el índice '6'.
+
+![alt text](image-24.png)
+
+
+
+```
+(//div[@class='row']/button)[last()]
+```
+
+- De esta manera, encerrando entre paréntesis todo el XPath para buscar primero todos los elementos, también funciona el truco del comando 'last()'.
+
+</details>
+
+
+---
+
+<details>
+
+<summary>Position</summary>
+
+- Así como el Index, el comando `[position()=X]` también arroja un único elemento XPath por `punteros`.
+
+```
+//H5[position()=3]
+```
+
+- Si hacen lo mismo, ¿para qué sirve?
+
+![alt text](image-9.png)
+
+Por que, a diferencia de INDEX, con `POSITION` podemos jugar con los `punteros`.
+
+![alt text](image-10.png)
+
+---
+
+---
+
+
+- Imaginemos que por alguna razón NO necesitamos el primer resultado, sólo los que dicen 'Test Case X: ...'
+
+- SABIENDO que el elemento que NO queremos está en la `primera posición`, podemos excluirlo de la búsqueda con XPath.
+
+
+```
+//H5[position()!=1]
+```
+
+- De esta manera podemos elegir todos los elementos `H5`, excluyendo el primero, y ahora únicamente encontrará 5 elementos.
+
+![alt text](image-16.png)
+
+- `POSITION`es un método versátil, con el que podemos conseguir el mismo resultado combinando los operadores.
+
+![alt text](image-17.png)
+
+</details>
+
+
+---
+
+<details>
+
+<summary>' last '</summary>
+
+- Si no sabemos el número de elementos, pero estamos seguros de que el que necesitamos es el último, podemos usar `LAST` como comando.
+
+```
+//H5[last()]
+```
+
+- Y seleccionará el último elemento del tipo que le indiquemos:
+
+![alt text](image-18.png)
+
+- Siendo posible además, elegir en reversa desde esa posición, similar al sistema de `arrays`de Python.
+
+```
+//H5[last()-1]
+```
+
+
+![alt text](image-19.png)
+
 
 </details>
 
