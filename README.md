@@ -428,11 +428,12 @@ public class RelativeXpathTests extends BaseTest {
 </details>
 
 
+
 ---
 
 <details>
 
-<summary>Position</summary>
+<summary>position()</summary>
 
 - Así como el Index, el comando `[position()=X]` también arroja un único elemento XPath por `punteros`.
 
@@ -477,7 +478,7 @@ Por que, a diferencia de INDEX, con `POSITION` podemos jugar con los `punteros`.
 
 <details>
 
-<summary>' last '</summary>
+<summary>last()</summary>
 
 - Si no sabemos el número de elementos, pero estamos seguros de que el que necesitamos es el último, podemos usar `LAST` como comando.
 
@@ -498,6 +499,56 @@ Por que, a diferencia de INDEX, con `POSITION` podemos jugar con los `punteros`.
 
 ![alt text](image-19.png)
 
+
+</details>
+
+### XPaths Functions - TEXT
+
+---
+
+<details>
+
+<summary>text()</summary>
+
+- La fórmula para encontrar un elemento por su TEXTO es:
+
+```
+//tag[text()='value']
+```
+
+- PERO, se debe escribir el texto COMPLETO tal cual aparece en el DOM.
+
+```
+//h5[text()='Create list of your favorite foods']
+```
+
+![alt text](image-25.png)
+
+- Otra manera de lograr el mismo resultado es:
+
+```
+//h5[normalize-space()='Create list of your favorite foods']
+```
+
+- Funciona para cualquier tipo de elemento que contenga TEXTO.
+
+```
+//a[text()='Selenium WebDriver with Java for beginners program']
+```
+
+![alt text](image-26.png)
+
+</details>
+
+---
+
+### Otro Terminlogía
+
+<details>
+
+<summary>Tema Nuevo</summary>
+
+You can add text HERE.
 
 </details>
 
