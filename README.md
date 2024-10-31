@@ -542,6 +542,72 @@ Por que, a diferencia de INDEX, con `POSITION` podemos jugar con los `punteros`.
 
 ---
 
+### XPath Functions - contains
+
+<details>
+
+<summary>contains()</summary>
+
+- Esta función es útil para `elementos parcialmente dinámicos`.
+- Permite seleccionar un elemento por el contenido `parcial` de un `atributo` en el DOM.
+
+Por ejemplo, si un ID tiene valores `parcialmente dinánicos`.
+
+![alt text](image-27.png)
+
+- La fórmula es:
+
+```
+//tag[contains(@attribute,'partial value')]
+```
+
+![alt text](image-28.png)
+
+
+- También es útil con `etiquetas` tipo `CLASS` que contienen atributos muy largos.
+- Podemos encontrar el mismo elemento sin necesidad de escribir todo el `valor`.
+
+```
+//body[contains(@class,'page-template-test_exceptions')]
+```
+
+![alt text](image-29.png)
+
+- También podemos encontrar varios elementos que comparten cierta característica.
+
+```
+id="edit_btn"
+id="save_btn"
+id="add_btn"
+```
+
+![alt text](image-30.png)
+
+```
+$x("//button[contains(@id,'_btn')]")
+```
+
+![alt text](image-31.png)
+
+- Finalmente, podemos encontrar un elemento por su `texto parcial` usando XPath.
+- En lugar del atributo, usamos la función `text` dentro de `contains` de la siguiente manera.
+
+![alt text](image-32.png)
+
+- Escribimos sólo una parte del texto del elemento.
+
+```
+$x("//p[contains(text(),'This page is created')]")
+```
+
+![alt text](image-33.png)
+
+- FIN
+
+</details>
+
+---
+
 ### Otro Terminlogía
 
 <details>
