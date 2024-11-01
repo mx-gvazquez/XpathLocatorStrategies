@@ -551,7 +551,7 @@ Por que, a diferencia de INDEX, con `POSITION` podemos jugar con los `punteros`.
 - Esta función es útil para `elementos parcialmente dinámicos`.
 - Permite seleccionar un elemento por el contenido `parcial` de un `atributo` en el DOM.
 
-Por ejemplo, si un ID tiene valores `parcialmente dinánicos`.
+Por ejemplo, si un ID tiene valores `parcialmente dinámicos`.
 
 ![alt text](image-27.png)
 
@@ -564,7 +564,7 @@ Por ejemplo, si un ID tiene valores `parcialmente dinánicos`.
 ![alt text](image-28.png)
 
 
-- También es útil con `etiquetas` tipo `CLASS` que contienen atributos muy largos.
+- También es útil con, por ejemplo, `etiquetas` tipo `CLASS` que contienen atributos muy largos.
 - Podemos encontrar el mismo elemento sin necesidad de escribir todo el `valor`.
 
 ```
@@ -607,6 +607,53 @@ $x("//p[contains(text(),'This page is created')]")
 </details>
 
 ---
+
+### XPath Function - Starts with
+
+<details>
+
+<summary>starts-with()</summary>
+
+- Esta función es similar a `contains()`, pero es mas específica en su sintaxis.
+- Requiere, como su nombre lo indica, únicamente el inicio del `valor` del `atributo`.
+- La fórmula es:
+
+```
+//tag[starts-with(@attribute,'beginning')]
+```
+
+Por ejemplo, para el elemento:
+
+![alt text](image-34.png)
+
+- Con código HTML:
+
+```
+ <input type="text" class="input-field" value="Pizza" disabled="true">
+```
+
+- Podemos usar el `valor` del  `atributo` 'CLASS'
+- Y el XPath con la función `starts-with()` quedaría de la siguiente manera:
+
+```
+//input[starts-with(@class,'input')]
+```
+
+![alt text](image-35.png)
+
+- De la misma manera que con `contains()`, podemos usar esta función para encontrar `TEXTO`.
+
+![alt text](image-36.png)
+
+- Por ejemplo, para este elemento, podemos usar el siguiente XPath.
+
+```
+//p[starts-with(text(),'This page')]
+```
+
+![alt text](image-37.png)
+
+</details>
 
 ### Otro Terminlogía
 
