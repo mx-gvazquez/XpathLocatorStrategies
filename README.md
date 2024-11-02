@@ -839,13 +839,36 @@ style="display: none;"
 
 ---
 
-### Otro Terminología 3
+### Wildcards
 
 <details>
 
-<summary>Tema Nuevo</summary>
+<summary>//*[@*='valor'] </summary>
 
-You can add text HERE.
+- Podemos utilizar el caracter comodín `*` para codificar una búsqueda rápida.
+
+- Asterísco en lugar de la etiqueta, encontrará cualquier `elemento nodo`.
+- Asterísco en lugar del atributo, encontrará cualquier `nodo atributo`.
+
+```
+//*[@class]
+```
+
+- Esto significa, busca cualquier elemento, que tenga un atributo llamado `class`.
+
+- A veces, también queremos un elemento donde algún atributo tenga un valor específico.
+
+```
+//button[@*='btn']
+```
+
+- Esto nos arroja 3 elementos
+
+```
+//button[@*='add_btn']
+```
+
+- Esto nos arroja 1 elemento
 
 </details>
 
