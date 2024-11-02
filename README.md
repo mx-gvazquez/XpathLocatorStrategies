@@ -548,8 +548,9 @@ Por que, a diferencia de INDEX, con `POSITION` podemos jugar con los `punteros`.
 
 <summary>contains()</summary>
 
-- Esta función es útil para `elementos parcialmente dinámicos`.
 - Permite seleccionar un elemento por el contenido `parcial` de un `atributo` en el DOM.
+- Esta función es útil para `elementos parcialmente dinámicos`.
+
 
 Por ejemplo, si un ID tiene valores `parcialmente dinámicos`.
 
@@ -655,15 +656,70 @@ Por ejemplo, para el elemento:
 
 </details>
 
-### Otro Terminlogía
+---
+
+### XPath Function - NOT
 
 <details>
 
-<summary>Tema Nuevo</summary>
+<summary>not()</summary>
 
-You can add text HERE.
+- La fórmula es muy sencilla:
+
+```
+//tag[not(anything we learned before)]
+```
+
+- Busca todos los elementos que cumplan la condición, PERO IGNORA el que te estoy definiiendo.
+
+![alt text](image-38.png)
+
+- Por ejemplo, si buscamos únicamente la etiqueta `botón` encontraremos 5 resultados:
+
+![alt text](image-39.png)
+
+- Si elegimos uno en particular, el resulado es ese botón:
+
+```
+//button[@id='edit_btn']
+```
+
+![alt text](image-40.png)
+
+---
+
+- Ahora, si usamos la función `not()`, el resultado son los 5 elementos originales, `excepto` el que definimos.
+
+```
+//button[not(@id='edit_btn')]
+```
+
+![alt text](image-41.png)
+
+
+---
+
+- Podemos excluir cualquier elemento, con cualquier método que aprendimos:
+
+```
+//H5
+```
+
+- Recordemos que en el ejercicio del `position()` exlcuímos el primer elemento.
+
+- Eso, también se puede lograr con la función `not()` de varias maneras.
+
+```
+//H5[not(position()=1)]
+//H5[not(text()='Create list of your favorite foods')]
+//H5[not(contains(text(),'favorite foods))]
+```
+
+![alt text](image-42.png)
 
 </details>
+
+
 
 </details>
 
@@ -675,9 +731,171 @@ You can add text HERE.
 
 <summary>Seccion 3: Advanced XPath</summary>
 
-You can add text within a collapsed section.
+---
 
-You can add an image or a code block, too.
+### Operador - OR
+
+<details>
+
+<summary>or</summary>
+
+- A veces, un mismo loclaizador se necesita escribir distinto dependiendo del navegador.
+
+![alt text](image-45.png)
+
+- Para esto, existen distintos operadores de XPath, pero sólo `OR` y `AND` son útiles en Automation.
+
+![alt text](image-44.png)
+
+- Con estas herramientas, podemos hacer estrategias de localización complejas.
+
+- Por ejemplo, de nuestra página muestra, podemos elegir múltiples elementos.
+
+```
+//button[@name='Add']
+```
+
+![alt text](image-46.png)
+
+```
+//button[@name='Remove']
+```
+
+![alt text](image-47.png)
+
+- En la página, en total, hay 8 botones:
+
+![alt text](image-48.png)
+
+- Entonces, si ambos comparten `etiqueta` para elegir `ambos` debemos agrupar el `predicado` del XPath.
+
+```
+//button[@name='Add' or @name='Remove']
+```
+
+- Podemos usar cualquier atributo del Xpath para la función.
+
+```
+//button[@name='Add' or @id='remove_btn']
+```
+
+
+
+</details>
+
+---
+
+### Operador - AND
+
+<details>
+
+<summary>and</summary>
+
+- Cuando necesitamos definir exactamente la unicidad de un elemento web, entonces debemos añadir condiciones para su cumplimiento simultáneo.
+
+- Para ello, debemos `añadir` condiciones al predicado (no siempre con `valor` en ellos)
+
+```
+//button[@class and @name='Save']
+```
+
+- Este ejemplo nos arroja 2 resultados, por que uno está oculto.
+
+- Los elementos ocultos tienen este atributo.
+
+```
+style="display: none;"
+```
+
+- Entonces, debemos añadir a la condición de la estrategia de loclaización, este dato:
+
+```
+//button
+```
+
+- 8 resultados
+
+```
+//button[@class='btn']
+```
+
+- 6 resultados
+
+```
+//button[@class='btn' and not(@style='display: none;')]
+```
+
+- 2 resultados, los que queremos:
+
+![alt text](image-49.png)
+
+- Otra manera de usar la sintaxis `AND` es sencillamente, agrupar entre `corchetes` los `predicados`.
+
+```
+//button [@class='btn'] [not(@style='display: none;')]
+```
+
+</details>
+
+---
+
+### Otro Terminología 3
+
+<details>
+
+<summary>Tema Nuevo</summary>
+
+You can add text HERE.
+
+</details>
+
+---
+
+### Otro Terminología 4
+
+<details>
+
+<summary>Tema Nuevo</summary>
+
+You can add text HERE.
+
+</details>
+
+---
+
+### Otro Terminología 5
+
+<details>
+
+<summary>Tema Nuevo</summary>
+
+You can add text HERE.
+
+</details>
+
+---
+
+### Otro Terminología 6
+
+<details>
+
+<summary>Tema Nuevo</summary>
+
+You can add text HERE.
+
+</details>
+
+---
+
+### Otro Terminología 7
+
+<details>
+
+<summary>Tema Nuevo</summary>
+
+You can add text HERE.
+
+</details>
 
 </details>
 
