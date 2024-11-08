@@ -874,25 +874,216 @@ style="display: none;"
 
 ---
 
-### Otro Terminología 4
+### XPath Axes
 
 <details>
 
-<summary>Tema Nuevo</summary>
+<summary>Elementos EJE</summary>
 
-You can add text HERE.
+- Recordando la clase de `Índices`, si buscamos un elemento desde la `raíz` del `DOM` debemos
+comenzar sabiendo que el primer resultado se encontrará en la dirección `[1]` en sentido `descendente`.
+
+- La fórmula de los `EJES XPath` es:
+
+```
+axisname::notetest[predicate] 
+```
+
+- Con esta técnica de `ejes`, podemos <u>invertir el sentido de la búsqueda</u> para que ocurra en forma `ascendente`.
+
+- Los comandos de `Xpath Axes del NODO` son:
+```
+1. DESCENDENTES
+   1. descendant  - Selects all of: Children / GrandChildren of the current node.
+   2. following-sibling  - Select all Sibling BEFORE the current node. 
+
+2. ASCENDENTES
+   1. preceding-sibling - Select all Sibling AFTER the current node. 
+   2. parent - Only the PARENT of the current node.
+   3. ancestor - Selects all of: Parents / GrandParents / etc, of the current node.
+```
+
+![alt text](image-50.png)
+
+---
+
+> EJEMPLO 1 - Búsqueda ascendente:
+
+Encontrar este elemento `<div>` imaginando que su `PADRE` no tuviera manera de ser definido. pero podemos partir de un hijo fácilmente localizable.
+
+![alt text](image-51.png)
+
+<u>**Solución:**</u>
+
+Se localiza al hijo con XPath: `//div[@id='row1']`
+
+Se utilza la fórmula de Axes: el símbolo es con `'/'` como si fuera nodo `derivado`.
+
+Se especifica el tipo de nodo `derivado`, en este caso, es un `parent::` 
+
+Se define el `TAG` del nodo al que queremos llegar; en este caso es un `div`.
+
+Quedando el Xpath Axes como:
+
+> `//div[@id='row1']/parent::div`
+
+**NOTA 1:** en este caso, como hay un único elemento padre también se pueden utilizar los comodines o `wildcards'  pudiendo ser el Xpath :
+
+`//div[@id='row1']/parent::*`
+
+Pero, se recomienda abogar por la especificidad.
+
+**NOTA 2:** En este ejemplo no se usaron 'predicados' para el elemento 'PADRE', por que no tiene ninguno, pero sí se pueden usar.
+
+![alt text](image-52.png)
+
+---
+
+**EJERCICIO 2: - búsqueda descendente pero ROBUSTA**
+
+- Obtener el segundo 'paso' debajo del 'Test Case 2': `Click Add button`
+
+![alt text](image-53.png)
+
+Sabiendo que el elemento buscado está dentro de un `<li>`, hijo de un `<ol>`, hijo de un `<section>` con atributos, sería muy sencillo elegir esta estragegia:
+
+`//section/ol[2]/li[2]`
+
+Pero, es muy similar a un XPath absoluto, es frágil ante cualquier cambio en el diseño de la página.
+
+![alt text](image-54.png)
+
+
+- Entonces:
+
+<u>Solución recomendada:</u>
+
+Elegir los elementos mas cercanos posible
+
+En este caso, el mismo nodo H5 que contiene el texto 'Test case 2:'
+
+Teniendo ese `eje` o 'referencia', podemos buscar sus elementos 'HERMANOS', que son los `<ol>`.
+
+Sabiendo que los 'ejes' son nuevas referencias, podemos usar 'Index' teniendo en cuenta que el elemento `<ol>` mas cercano debe ser el que queremos, entonces queda:
+
+```
+//h5[contains(text(),'Test case 2:')]/following-sibling::ol[1]/li[2]
+```
+
+![alt text](image-55.png)
+
+---
+
+**EJERCICIO 3: - búsqueda ascendente y ROBUSTA**
+
+- Referencias 'hacia arriba'.
+
+- Obtener el encabezado de una lista de pasos 'Test Case 2',  a partir de uno de sus 'Pasos' listados mas abajo, `Verify text saved`.
+
+![alt text](image-56.png)
+
+- Pistas:
+
+   - Usar la función 'TEXT' para encontrar nuestro elemento 'eje'.
+
+   - Luego, usar el 'eje' PARENT.
+
+   - Luego, usar el 'eje' PRECEDING-SIBLING
+
+   ![alt text](image-57.png)
+
+```
+//li[contains(text(),'Verify text saved')]/parent::ol/preceding-sibling::h5[1]
+```
+
+** Lección: ** 
+
+OJO: 
+
+Siempre, al realizar una búsqueda a partir de un elemento éste se convierte en el referente a partir del cuál se 'reinicia' el conteo con 'Índices'.
+
+Esto es importante, por que queremos siempre elegir al elemento mas cercano y para ello nos valemos de los 'Índex'.
 
 </details>
 
 ---
 
-### Otro Terminología 5
+### Elementos relativos a otros elementos.
 
 <details>
 
-<summary>Tema Nuevo</summary>
+<summary>.//</summary>
 
-You can add text HERE.
+- Esta expresión es útil dentro de un predicado, con un elemento usado como 'eje relativo'.
+
+- **OJO**  
+No es lo mismo esto, una busqueda 'descendente'...
+
+```
+//div/input
+//div/child::input         (alternativa 1)
+//input[parent::div]       (alternativa 2)
+```
+
+![alt text](image-58.png)
+
+
+**QUE ESTO** 
+
+Una búsqueda relativa a otros elementos.
+
+```
+//div[./input]
+```
+
+![alt text](image-59.png)
+
+
+- Estamos buscando un elemento `div` en cualquier parte del DOM, que sea `relativo` a un elemento
+`HIJO` tipo `input`.
+
+- O sea, un elemento 'div'`PADRE` relativo al `HIJO` tipo 'input'.
+
+> Estamos buscando al Papá de este chamaco.
+
+- Sabiendo esto, podemos escribir también:
+
+```
+//input/parent::div
+```
+
+---
+
+**TRUCAZO**
+
+- Podemos usar predicados dentro de otros Predicados, para definir elementos.
+
+- Si sólo usamos esto:
+
+```
+//input[parent::div]
+```
+
+Da esto:
+
+![alt text](image-60.png)
+
+
+- Pero si somos mas específicos, encontraremos exactamente lo que estamos buscando:
+
+```
+//input[parent::div[@id='row2']]
+```
+
+![alt text](image-61.png)
+
+- Si bien funciona, hay maneras mas sencillas y legibles de lograr los mismos resultados.
+
+```
+//div[@id='row2']/input
+```
+
+
 
 </details>
 
