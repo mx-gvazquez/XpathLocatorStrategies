@@ -1131,15 +1131,104 @@ Da esto:
 
 ---
 
-### Otro Terminología 7
+### SVG WebElements
+<details>
+
+<summary>SVG</summary>
+
+- Estas porquerías se manejan con reglas distintas a todos los demás elementos del DOM.
+
+- Esto incluye a sus `hijos` dentro de la etiqueta `svg`.
+
+![alt text](image-65.png)
+
+- Suponiendo que necesitamos el segundo elemento con etiqueta `rect`, a pesar de que tiene atributos, no lo podemos seleccionar de manera convencional.
+
+```
+//rect[@y='11']
+```
+
+- La solución rápida, es utilizar un `wildcard` en lugar de la etiqueta.
+
+```
+//*[@y='11']
+```
+
+- La verdadera solución es usar el **wildcard** pero con la función `NAME` para definir la etiqueta.
+
+
+```
+//*[name()='rect' and @y='11']
+```
+
+- Y si el elemento tiene atributos, pues mejor aún.
+
+![alt text](image-66.png)
+
+
+- De nuevo, la lección es que para los elementos `SVG` o sus hijos, usamos `name()='tag'`.
+
+- Imaginemos que necesitamos el elemento con etiqueta `path`, nieto de un `SVG`.
+
+```
+//*[name()='symbol' and @id='icon-amazon']/*[name()='path']
+```
+
+
+![alt text](image-67.png)
+
+- El truco del `wildcard + name()='tag'` aplica también a los hijos.
+
+</details>
+
+
+### Detener la página Web
 
 <details>
 
-<summary>Tema Nuevo</summary>
+<summary>Pausar la ejecución.</summary>
 
-You can add text HERE.
+- Si queremos cachar cosas que suceden rápidamente, como elementos visibles que desaparecen...
+
+
+![alt text](image-68.png)
+
+- Tenemos que determinar qué es exactamente lo que dispara el `evento`, para luego abrir el `Inspector de elementos`.
+
+- En este caso, sabemos que el mensaje `Loading` se dispara después de `hacer click` en el botón `ADD`.
+
+- Seguimos la ruta en la configuración del navegador:
+
+> Sources > Event Listener Breakpoints > Mouse > 'click'
+
+
+![alt text](image-69.png)
+
+- Damos click en el botón 'ADD'.
+
+- Y debemos dar varios 'click' en el botón `Step Over`.
+
+![alt text](image-70.png)
+
+- Veremos cómo se ejecutan las acciones de manera secuencial, desaparecen los botones `Edit` y `Add`, pero finalmente aparece el mensaje `Loading`.
+
+- Para encontrar el localizador del elemento, o inspeccionar el DOM, hacemos lo usual. Con el botón auxiliar del `Inspector de Elementos`.
+
+![alt text](image-71.png)
+
+- Observese que automáticamente nos regresa al menú `Elements`.
+
+- Para terminar la ejecución del `Debugger`, sencillamente damos click en `Resume script execution` en cualquiera de las dos posiciones.
+
+![alt text](image-72.png)
+
 
 </details>
+
+
+
+
+
 
 </details>
 
