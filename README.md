@@ -1089,13 +1089,43 @@ Da esto:
 
 ---
 
-### Otro Terminología 6
+### Seleccionar varios Xpaths simultáneamente
 
 <details>
 
-<summary>Tema Nuevo</summary>
+<summary>'|'</summary>
 
-You can add text HERE.
+- Con el símbolo `|` podemos seleccionar varios elementos XPath, sin hacer uso del `OR`.
+
+- De esta manera podemos combinar 2 expresiones Xpath simultáneamente.
+
+- Generalmente se usa cuando tenemos una lista de elementos y éstos tienen distinto localizador.
+
+- Imaginemos que necesitamos todos los elementos con texto en negritas,  `H5` y `H2`. Queda:
+
+```
+//h5 | //h2
+```
+
+![alt text](image-62.png)
+
+
+- Ahora, podemos también usar XPath completos y encadenarlos:
+
+```
+//div[@id='row1']/button | //div[@id='row1']/input
+```
+
+![alt text](image-63.png)
+
+
+- Lo mejor, es que no está limitado a un número determinado de expresiones XPath
+
+```
+//h5 | //h2 | //p
+```
+
+![alt text](image-64.png)
 
 </details>
 
